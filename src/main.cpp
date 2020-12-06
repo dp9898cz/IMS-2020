@@ -9,6 +9,7 @@ const int droneSpeed = 1878;        // speed - meters per minute (also battery c
 const int droneMaxDistance = 10000; // meters
 const int chargeRate = 332;         // meters per minute (60 minutes to charge the drone 0 to 100 %)
 const int lastOrderDepach = 622;    // last possible time for drone to leave
+const int dispachTime = 0;          // minutes (use zipline or whatever)
 
 int packagesDelivered = 0;
 int packagesCreated = 0;
