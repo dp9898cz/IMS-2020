@@ -33,13 +33,6 @@ class PackageGenerator : public Event {
 	void Behavior();
 };
 
-/* class PackageQueue : public Queue {
-    using Queue::Queue;
-
-    public:
-        void activateFirst();
-}; */
-
 void debugPrint(string message);
 
 #endif // #define MAIN_HPP

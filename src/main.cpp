@@ -2,20 +2,20 @@
 
 #define DEBUG true
 
+//wing drone specs
 const int lightMinutes = 633;       // Average number of sunlight minutes a day 
-const int numberOfDrones = 6;
+const int numberOfDrones = 10;
 const int droneBattery = 20000;     // meters to drain battery
 const int droneSpeed = 1878;        // speed - meters per minute (also battery consumption per minute)
 const int droneMaxDistance = 10000; // meters
 const int chargeRate = 332;         // meters per minute (60 minutes to charge the drone 0 to 100 %)
 const int lastOrderDepach = 622;    // last possible time for drone to leave
-const int dispachTime = 0;          // minutes (use zipline or whatever)
+const int dispachTime = 1;          // minutes (use zipline or whatever)
 
 int packagesDelivered = 0;
 int packagesCreated = 0;
 
 Drone drones[numberOfDrones];
-//PackageQueue packageQueue("Packages waiting for avaiable drone");
 
 Stat S_deliveryTime("Delivery time (minutes)");
 Stat S_distance("Destination distance (metres)");
@@ -115,23 +115,15 @@ void Package::releaseDrone() {
     //release drone
     Release(*this->drone);
     this->drone->idleTime = Time;
-
-    //packageQueue.activateFirst();
 }
 
 
 void PackageGenerator::Behavior() {
     if (Time < (lastOrderDepach - 4)){      //dont create if its 15 minutes to the end
         (new Package)->Activate();          //create new package
-        Activate(Time + Exponential(10));   //set activation to generate another package 
+        Activate(Time + Exponential(1));   //set activation to generate another package 
     }
 }
-
-/* void PackageQueue::activateFirst() {
-    if (!this->Empty()) {
-        this->GetFirst()->Activate();
-    }
-} */
 
 
 int main() {
